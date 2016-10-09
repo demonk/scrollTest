@@ -29,7 +29,6 @@ public class ScrollerLayout extends ViewGroup {
 
     private int mRightBorder;//可滚动右边界
 
-
     public ScrollerLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -89,10 +88,10 @@ public class ScrollerLayout extends ViewGroup {
                 mXMove = ev.getRawX();
                 //如果是从左往右拉，则值为负，反之为正,与getScrollX()刚好相反
                 int scrolledX = (int) (mXLastMove - mXMove);
-//                Log.e("demonk", "1.ontouchevent:" + getWidth());
-//                Log.e("demonk", "2.ontouchevent:" + getScrollX());
-//                Log.e("demonk", "3.ontouchevent:" + scrolledX);
-//                Log.e("demonk", "4.ontouchevent:" + mRightBorder);
+                Log.e("demonk", "1.ontouchevent:" + getWidth());
+                Log.e("demonk", "2.ontouchevent:" + getScrollX());
+                Log.e("demonk", "3.ontouchevent:" + scrolledX);
+                Log.e("demonk", "4.ontouchevent:" + mRightBorder);
 
                 //getScrollX为已经拉动的距离，左为正右为负
                 if (getScrollX() + scrolledX < mLeftBorder) {
@@ -110,6 +109,7 @@ public class ScrollerLayout extends ViewGroup {
                 int targetIndex = (getScrollX() + getWidth() / 2) / getWidth();
                 int dx = targetIndex * getWidth() - getScrollX();
                 // 第二步，调用startScroll()方法来初始化滚动数据并刷新界面
+                Log.e("demonk", "start scroll,scrollx=" + getScrollX() + ",dx=" + dx);
                 mScroller.startScroll(getScrollX(), 0, dx, 0);//三四参数为滚动距离,这是一个过程
                 invalidate();
                 break;
@@ -120,12 +120,12 @@ public class ScrollerLayout extends ViewGroup {
     //由draw调用
     public void computeScroll() {
         if (mScroller.computeScrollOffset()) {
-            Log.e("demonk","finish");
-            Log.e("demonk","x="+mScroller.getCurrX()+",y="+mScroller.getCurrY());
-            scrollTo(mScroller.getCurrX(), mScroller.getCurrY());//得益于startScroll，在时间内改变x的值，使得看上去说就是“滑动”
+//            Log.e("demonk", "finish");
+//            Log.e("demonk", "x=" + mScroller.getCurrX() + ",y=" + mScroller.getCurrY());
+//            scrollTo(mScroller.getCurrX(), mScroller.getCurrY());//得益于startScroll，在时间内改变x的值，使得看上去说就是“滑动”
             invalidate();
-        }else{
-            Log.e("demonk","not finish");
+        } else {
+//            Log.e("demonk","not finish");
         }
     }
 }
